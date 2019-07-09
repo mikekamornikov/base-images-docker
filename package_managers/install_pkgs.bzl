@@ -96,7 +96,10 @@ docker load -i {base_image_tar}
 
 
 # ls -la $(pwd)/{installables_tar} && ls -la $(pwd)/{installer_script} && exit 1
-docker run -v $(pwd)/{installables_tar}:/tmp/{installables_tar} -v $(pwd)/{installer_script}:/tmp/installer.sh --privileged $image_id ls -la /tmp && exit 1
+
+cp $(pwd)/{installer_script} /tmp/tmp_installer_ai_75.sh
+
+docker run -v $(pwd)/{installables_tar}:/tmp/{installables_tar} -v /tmp/tmp_installer_ai_75.sh:/tmp/installer.sh --privileged $image_id ls -la /tmp && exit 1
 # cid=$(docker run -d -v $(pwd)/{installables_tar}:/tmp/{installables_tar} -v $(pwd)/{installer_script}:/tmp/installer.sh --privileged $image_id /tmp/installer.sh)
 
 docker attach $cid || true
