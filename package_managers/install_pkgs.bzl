@@ -96,7 +96,7 @@ docker load -i {base_image_tar}
 
 
 # ls -la $(pwd)/{installables_tar} && ls -la $(pwd)/{installer_script} && exit 1
-docker run -v $(pwd)/{installables_tar}:/tmp/{installables_tar} -v $(pwd)/{installer_script}:/tmp/installer.sh --privileged $image_id ls -la /tmp/installer.sh && exit 1
+docker run -v $(pwd)/{installables_tar}:/tmp/{installables_tar} -v $(pwd)/{installer_script}:/tmp/installer.sh --privileged $image_id ls -la /tmp && exit 1
 # cid=$(docker run -d -v $(pwd)/{installables_tar}:/tmp/{installables_tar} -v $(pwd)/{installer_script}:/tmp/installer.sh --privileged $image_id /tmp/installer.sh)
 
 docker attach $cid || true
@@ -116,7 +116,7 @@ docker rm $cid""".format(util_script=ctx.file._image_utils.path,
   ctx.actions.write(
     output=script,
     content=build_contents,
-    is_executable = True,
+    # is_executable = True,
   )
   ctx.actions.run(
     outputs=[unstripped_tar],
