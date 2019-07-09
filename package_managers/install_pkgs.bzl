@@ -95,7 +95,7 @@ image_id=$(python {image_id_extractor_path} {base_image_tar})
 docker load -i {base_image_tar}
 
 
-ls -la $(pwd)/{installables_tar} && exit 1
+ls -la $(pwd)/{installables_tar} && ls -la $(pwd)/{installer_script} && exit 1
 
 cid=$(docker run -d -v $(pwd)/{installables_tar}:/tmp/{installables_tar} -v $(pwd)/{installer_script}:/tmp/installer.sh --privileged $image_id /tmp/installer.sh)
 
