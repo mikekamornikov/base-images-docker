@@ -114,6 +114,7 @@ docker rm $cid""".format(util_script=ctx.file._image_utils.path,
   ctx.actions.write(
     output=script,
     content=build_contents,
+    is_executable = True,
   )
   ctx.actions.run(
     outputs=[unstripped_tar],
